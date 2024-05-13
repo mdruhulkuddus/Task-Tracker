@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { IoMdCheckboxOutline } from "react-icons/io";
+import { FaRegSquareCheck } from "react-icons/fa6";
 import { BiEdit } from "react-icons/bi";
 // congetti effect
 import Confetti from "react-confetti";
@@ -216,21 +217,23 @@ function App() {
                     </div>
                     <div>
                       <BiEdit
-                        className="check-icon edit-icon"
+                        className="icon edit-icon"
                         title="Edit"
                         onClick={() => {
                           handleEdit(index, item);
                         }}
                       />
                       <AiOutlineDelete
-                        className="icon"
+                        className="icon delet-icon"
                         title="Delete"
-                        onClick={() => {
+                        // onClick={() => { handleDeleteTodo(index);   }}
+                        onClick={() => { if (window.confirm('Are you sure to delete this task?')){
                           handleDeleteTodo(index);
-                        }}
+                        }  } }
                       />
-                      <IoMdCheckboxOutline
-                        className="check-icon"
+                      {/* <IoMdCheckboxOutline */}
+                      <FaRegSquareCheck 
+                        className="icon complet-icon"
                         title="Done"
                         onClick={() => {
                           handleComplete(index);
@@ -261,7 +264,7 @@ function App() {
                 <div className="todo-list-item" key={index}>
                   <div>
                     <h3>{item.title}</h3>
-                    <p>{item.description}</p>
+                    {/* <p>{item.description}</p> */}
                     <p>
                       <small>Completed on: </small>
                       {item.completedTime}

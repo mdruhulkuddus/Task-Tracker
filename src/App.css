@@ -66,6 +66,7 @@ h1{
   padding: 10px;
   border: none;
   width: 250px;
+  border-radius: 5px;
 }
 
 .todo-input-item input:focus{
@@ -146,44 +147,47 @@ h1{
 .icon{
   font-size: 25px;
   cursor: pointer;
+  padding: 2px;
 }
 
-.icon:hover{
+.delet-icon:hover{
   color: red;
 }
 
-.check-icon{
-  font-size: 25px;
-  color:rgb(0,230,122);
-  cursor: pointer;
+.complet-icon{
+  color:#0baf8f;
+}
+.complet-icon:hover{
+  color:#1c6254;
 }
 .edit-icon{
-  color: cadetblue;
+  color: #368ac2;
 }
-.check-icon:hover{
-  color: rgb(38, 38, 164);
+.edit-icon:hover{
+  color: rgb(218, 63, 185);
 }
 
 .edit_todo{
-  background-color: #414040;
+  background-color: #a5d1f5;
   padding: 10px;
   display: flex;
   flex-direction: column;
 }
 
 .edit_todo input,.edit_todo textarea{
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
   padding: 10px;
-  margin: 5px;
+  margin-bottom: 5px;
   border-radius: 3px;
+  border: none;
 }
 
 .edit_todo .primaryBtn{
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
-  font-size: 16px;
-  width:fit-content;
+  font-size: 15px;
+ border-radius: 3px;
 }
 
 .congratsDiv{
