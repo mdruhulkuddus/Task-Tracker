@@ -63,10 +63,10 @@ h1{
 }
 
 .todo-input-item input{
-  padding: 10px;
+  padding: 8px;
   border: none;
   width: 250px;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 .todo-input-item input:focus{
@@ -116,7 +116,7 @@ h1{
 }
 
 .btn-area{
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .todo-list-item{
@@ -124,16 +124,14 @@ h1{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #17906d;
+  padding: 10px;
+  border-bottom: 1px solid #a2a1a1;
   box-shadow: 0px 2px 3px rgb(184, 184, 184);
+  border-radius: 2px;
 }
 
 .todo-list-item h3{
-  font-size: 20px;
+  font-size: 18px;
   color: rgb(18, 22, 20);
   margin: 0;
 }
@@ -172,6 +170,7 @@ h1{
   padding: 10px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 5px;
 }
 
 .edit_todo input,.edit_todo textarea{
