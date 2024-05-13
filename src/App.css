@@ -157,11 +157,9 @@ h1{
   color:rgb(0,230,122);
   cursor: pointer;
 }
-
-.check-icon:hover{
-  color: rgb(4, 196, 106);
+.edit-icon{
+  color: cadetblue;
 }
-
 .check-icon:hover{
   color: rgb(38, 38, 164);
 }
@@ -186,4 +184,20 @@ h1{
   padding: 10px;
   font-size: 16px;
   width:fit-content;
+}
+
+.congratsDiv{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.congratsMessage{
+  color: rgb(15, 23, 15);
+  font-size: 15px;
+  font-weight: bold;
+
+}
+.firstParstMessage{
+  color: #0baf8f;
+  font-size: 18px;
 }

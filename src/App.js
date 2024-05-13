@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { BiEdit } from "react-icons/bi";
+// congetti effect
+import Confetti from "react-confetti";
+// import PopupMessage from 'Popup';
 
 function App() {
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
@@ -12,6 +15,8 @@ function App() {
   const [CompletedTodos, setCompletedTodos] = useState([]); // empty array
   const [currentEdit, setCurrentEdit] = useState("");
   const [currentEditedItem, setCurrentEditedItem] = useState("");
+  // confetti
+  const [showPopup, setShowPopup] = useState(false);
 
   // add task
 
@@ -41,11 +46,15 @@ function App() {
 
   // delete completed task
 
-  const handleDeleteCompletedTodo = (index) =>{
+  const handleDeleteCompletedTodo = (index) => {
     let reducedTodo = [...CompletedTodos];
     reducedTodo.splice(index, 1);
     localStorage.setItem("completedTodos", JSON.stringify(reducedTodo));
     setCompletedTodos(reducedTodo);
+  };
+
+  function PopupMessage({ children }) {
+    return <div className="popup">{children}</div>;
   }
 
   // complete task
@@ -79,6 +88,11 @@ function App() {
       "completedTodos",
       JSON.stringify(UpdatedCompletedTodosArr)
     );
+
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 5 * 1000);
   };
 
   // edit update
@@ -86,25 +100,24 @@ function App() {
   const handleEdit = (index, item) => {
     setCurrentEdit(index);
     setCurrentEditedItem(item);
-  }
+  };
 
-  const handleUpdateTitle = (value) =>{
+  const handleUpdateTitle = (value) => {
     setCurrentEditedItem((prev) => {
-      return {...prev, title:value}
-    })
-  }
-  const handleUpdateDescription = (value) =>{
+      return { ...prev, title: value };
+    });
+  };
+  const handleUpdateDescription = (value) => {
     setCurrentEditedItem((prev) => {
-      return {...prev, description:value}
-    })
-  }
-  const handleUpdateTodo = ()=> {
+      return { ...prev, description: value };
+    });
+  };
+  const handleUpdateTodo = () => {
     let newTodo = [...allTodos];
     newTodo[currentEdit] = currentEditedItem;
     setTodos(newTodo);
     setCurrentEdit("");
-  }
-  
+  };
 
   useEffect(() => {
     let savedTodo = JSON.parse(localStorage.getItem("todolist"));
@@ -121,9 +134,9 @@ function App() {
     <div className="App">
       {/* <h1>Task Tracker</h1> */}
       <div className="todo-wrapper">
-       <div className="logo">
-       <img src="/images/logo1.png" alt="Logo" />
-       </div>
+        <div className="logo">
+          <img src="/images/logo1.png" alt="Logo" />
+        </div>
         <div className="todo-input">
           <div className="todo-input-item">
             <label htmlFor="title">Title</label>
@@ -168,25 +181,33 @@ function App() {
           </button>
         </div>
         <div className="todo-list">
-          {isCompleteScreen === false &&         // all todos
+          {isCompleteScreen === false && // all todos
             allTodos.map((item, index) => {
+              if (currentEdit === index) {
+                return (
+                  <div className="edit_todo" key={index}>
+                    <input
+                      type="text"
+                      onChange={(e) => handleUpdateTitle(e.target.value)}
+                      value={currentEditedItem.title}
+                    />
 
-              if(currentEdit === index){
-                  return(
-                    <div className="edit_todo" key={index}>
-                      <input type="text" onChange={(e)=>handleUpdateTitle(e.target.value)}  value={currentEditedItem.title} />
-                    
-                    <textarea name="" id="" onChange={(e)=>handleUpdateDescription(e.target.value)} value={currentEditedItem.description}></textarea>
+                    <textarea
+                      name=""
+                      id=""
+                      onChange={(e) => handleUpdateDescription(e.target.value)}
+                      value={currentEditedItem.description}
+                    ></textarea>
                     <button
-              type="button"
-              onClick={handleUpdateTodo}
-              className="primaryBtn"
-            >
-              Update
-            </button>
-                    </div>
-                  );
-              }else{
+                      type="button"
+                      onClick={handleUpdateTodo}
+                      className="primaryBtn"
+                    >
+                      Update
+                    </button>
+                  </div>
+                );
+              } else {
                 return (
                   <div className="todo-list-item" key={index}>
                     <div>
@@ -194,12 +215,12 @@ function App() {
                       <p>{item.description}</p>
                     </div>
                     <div>
-                    <BiEdit 
-                       className="check-icon"
-                       title="Edit"
-                       onClick={() => {
-                         handleEdit(index, item);
-                       }}
+                      <BiEdit
+                        className="check-icon edit-icon"
+                        title="Edit"
+                        onClick={() => {
+                          handleEdit(index, item);
+                        }}
                       />
                       <AiOutlineDelete
                         className="icon"
@@ -208,20 +229,31 @@ function App() {
                           handleDeleteTodo(index);
                         }}
                       />
-                       <IoMdCheckboxOutline
+                      <IoMdCheckboxOutline
                         className="check-icon"
                         title="Done"
                         onClick={() => {
                           handleComplete(index);
                         }}
                       />
-                 
                     </div>
                   </div>
                 );
               }
-
             })}
+
+          {showPopup && (
+            <PopupMessage>
+              <div className="congratsDiv">
+                <p className="congratsMessage"> <span className="firstParstMessage"> Congrats!</span> You have done another task.</p>
+                {/* Confetti effect */}
+                <Confetti
+                  width={window.innerWidth}
+                  height={window.innerHeight}
+                />
+              </div>
+            </PopupMessage>
+          )}
 
           {isCompleteScreen === true &&
             CompletedTodos.map((item, index) => {
