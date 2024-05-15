@@ -117,6 +117,7 @@ h1{
 
 .btn-area{
   margin-bottom: 10px;
+  /* text-align: center; */
 }
 
 .todo-list-item{
@@ -192,10 +193,12 @@ h1{
 .congratsDiv{
   text-align: center;
   margin-top: 20px;
+  
 }
 
 .congratsMessage{
-  color: rgb(15, 23, 15);
+  /* background-color: rgb(193, 251, 243); */
+  color: rgb(15, 22, 23);
   font-size: 15px;
   font-weight: bold;
 
@@ -203,4 +206,5 @@ h1{
 .firstParstMessage{
   color: #0baf8f;
   font-size: 18px;
+ 
 }

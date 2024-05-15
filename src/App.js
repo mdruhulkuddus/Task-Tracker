@@ -30,7 +30,7 @@ function App() {
     let updatedTodoArr = [...allTodos];
     updatedTodoArr.unshift(newTodoItem);
     setTodos(updatedTodoArr);
-    localStorage.setItem("todolist", JSON.stringify(updatedTodoArr)); // js object or array to JSON string
+    localStorage.setItem("todolist", JSON.stringify(updatedTodoArr)); // js object or array to JSON string to save in storage
     setNewTitle("");
     setNewDescription("");
   };
@@ -84,6 +84,8 @@ function App() {
     let updatedTodoArr = [...allTodos];
     updatedTodoArr.splice(index, 1);
     setTodos(updatedTodoArr);
+
+    localStorage.setItem("todolist", JSON.stringify(updatedTodoArr));
 
     localStorage.setItem(
       "completedTodos",
@@ -172,13 +174,13 @@ function App() {
             className={`secondaryBtn ${isCompleteScreen === false && "active"}`}
             onClick={() => setIsCompleteScreen(false)}
           >
-            Todos
+            Todos ({allTodos.length})
           </button>
           <button
             className={`secondaryBtn ${isCompleteScreen === true && "active"}`}
             onClick={() => setIsCompleteScreen(true)}
           >
-            Completed
+            Completed ({CompletedTodos.length})
           </button>
         </div>
         <div className="todo-list">
@@ -227,12 +229,16 @@ function App() {
                         className="icon delet-icon"
                         title="Delete"
                         // onClick={() => { handleDeleteTodo(index);   }}
-                        onClick={() => { if (window.confirm('Are you sure to delete this task?')){
-                          handleDeleteTodo(index);
-                        }  } }
+                        onClick={() => {
+                          if (
+                            window.confirm("Are you sure to delete this task?")
+                          ) {
+                            handleDeleteTodo(index);
+                          }
+                        }}
                       />
                       {/* <IoMdCheckboxOutline */}
-                      <FaRegSquareCheck 
+                      <FaRegSquareCheck
                         className="icon complet-icon"
                         title="Done"
                         onClick={() => {
@@ -248,7 +254,11 @@ function App() {
           {showPopup && (
             <PopupMessage>
               <div className="congratsDiv">
-                <p className="congratsMessage"> <span className="firstParstMessage"> Congrats!</span> You have done another task.</p>
+                <span className="congratsMessage">
+                  {" "}
+                  <span className="firstParstMessage"> Congrats!</span> You have
+                  done another task.
+                </span>
                 {/* Confetti effect */}
                 <Confetti
                   width={window.innerWidth}
