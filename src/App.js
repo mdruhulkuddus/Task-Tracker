@@ -7,6 +7,9 @@ import { BiEdit } from "react-icons/bi";
 // congetti effect
 import Confetti from "react-confetti";
 // import PopupMessage from 'Popup';
+//toast message
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
@@ -31,6 +34,7 @@ function App() {
     updatedTodoArr.unshift(newTodoItem);
     setTodos(updatedTodoArr);
     localStorage.setItem("todolist", JSON.stringify(updatedTodoArr)); // js object or array to JSON string to save in storage
+    toast("New Task Added");
     setNewTitle("");
     setNewDescription("");
   };
@@ -43,6 +47,7 @@ function App() {
     // Storing the updated reducedTodo array in localStorage
     localStorage.setItem("todolist", JSON.stringify(reducedTodo));
     setTodos(reducedTodo);
+    toast.error("Task Deleted Successfully")
   };
 
   // delete completed task
@@ -120,6 +125,7 @@ function App() {
     newTodo[currentEdit] = currentEditedItem;
     setTodos(newTodo);
     setCurrentEdit("");
+    toast.success("Todo Updated Successfully");
   };
 
   useEffect(() => {
@@ -294,6 +300,7 @@ function App() {
             })}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
